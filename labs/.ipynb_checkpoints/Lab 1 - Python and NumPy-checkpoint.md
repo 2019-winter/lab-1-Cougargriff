@@ -36,7 +36,9 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+- Other than downloading the assignment zip on github and uploading to jupyterlabs ide ourselves. how can we import github classroom projects easily into jupyterlab. 
+- How does the md file sync with the .iypynb automatically?
+- Due to how the .md file and .ipynb file sync. Should we only edit in the .md file then turn in the .ipynb file?
 
 
 ## Exercises 1-7
@@ -46,46 +48,73 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+
+a = np.full((4,6), 2)
+print(a) 
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+# kinda confused on what a leading diagonal is...
+b = (2 * np.eye(4,6)) + np.ones((4,6))
+print(b)
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+c = a * b
+print(c)
+
+# because the dot product needs a x b , b x c matrix layout for operands
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+d = np.dot(a.transpose(), b)
+e = np.dot(a,b.transpose())
+print(d)
+print(d)
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def runIt():
+    print("Hello World. This environment is my new habitat...")
+    
+runIt()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+def details():
+    r = np.random.random((4,6))
+    print("sum: ", r.sum())
+    print("mean: ", r.mean())
+
+details()
+    
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+def loopy(arr):
+    ones = 0
+    for row in arr:
+        for i in row:
+            if i == 1:
+                ones += 1
+    return ones
+                
+o = np.eye(4,6)
+print(o)
+print("ones count: ", loopy(o))
 ```
 
 ## Excercises 8-???
@@ -96,28 +125,45 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+
+ad = pd.DataFrame(a, index=list(range(4)), columns=list(range(6)))
+print(ad)
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+bd = pd.DataFrame(b, index=list(range(4)), columns=list(range(6)))
+print(bd)
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+cd = pd.DataFrame(c, index=list(range(4)), columns=list(range(6)))
+print(cd)
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+def data_ones(arr):
+    ones = 0
+    for i in range(len(arr)):
+        for j in range(len(arr.iloc[i])):
+            if 1 == arr.iloc[i,j]:
+                ones += 1
+    return ones
+
+nd = pd.DataFrame(np.eye(4,6), index=list(range(4)), columns=list(range(6)))
+print(nd)
+
+print("# of ones: ",data_ones(nd))
+    
 ```
 
 ## Exercises 12-14
@@ -137,22 +183,28 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+cols = titanic_df['name']
+cols
+
 ```
 
 ## Exercise 13
 After setting the index to ``sex``, how do you select all passengers that are ``female``? And how many female passengers are there?
 
 ```python
-## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
+
+```
+
+```python
+titanic_df.reindex(index=titanic_df[0], columns=list(titanic_df.columns))
 ```
 
 ```python
